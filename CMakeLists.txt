@@ -15,3 +15,5 @@ include_directories(${GTEST_INCLUDE_DIRS})
 function(linkTestLibraries exec)
 	target_link_libraries(${exec} ${GTEST_BOTH_LIBRARIES} pthread)
 endfunction()
+
+add_subdirectory(life)

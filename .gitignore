@@ -30,3 +30,15 @@
 *.exe
 *.out
 *.app
+
+# Build folder
+bin/
+
+# YCM
+compile_commands.json
+
+# Tags
+tags
+
+# Vim temporaries
+*.swp

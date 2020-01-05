@@ -1,4 +1,8 @@
-add_executable(test_life tests/main.cpp)
+add_executable(test_life
+	tests/main.cpp
+	tests/board.cpp
+)
+
 linkTestLibraries(test_life)
 
 add_test(

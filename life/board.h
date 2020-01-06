@@ -23,14 +23,14 @@ public:
 		return m_height;
 	}
 
-	static Board Create(const std::string& pattern)
-	{
-		return Board{int(pattern[4] - '0'), int(pattern[11] - '0')};
-	}
-
 private:
 	int m_width;
 	int m_height;
 };
+
+Board FromRLE(const std::string& pattern)
+{
+	return Board{int(pattern[4] - '0'), int(pattern[11] - '0')};
+}
 
 } // end namespace

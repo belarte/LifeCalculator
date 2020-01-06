@@ -28,9 +28,19 @@ private:
 	int m_height;
 };
 
+class RLEParser
+{
+public:
+	Board parse(const std::string& input) const
+	{
+		return Board{int(input[4] - '0'), int(input[11] - '0')};
+	}
+};
+
 Board FromRLE(const std::string& pattern)
 {
-	return Board{int(pattern[4] - '0'), int(pattern[11] - '0')};
+	RLEParser parser;
+	return parser.parse(pattern);
 }
 
 } // end namespace

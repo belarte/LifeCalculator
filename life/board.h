@@ -2,15 +2,23 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace life {
+
+struct Coord
+{
+	unsigned int x;
+	unsigned int y;
+};
 
 class Board
 {
 public:
 	Board(int w, int h) :
 		m_width{w},
-		m_height{h}
+		m_height{h},
+		m_cells((m_width+2) * (m_height+2), 0)
 	{
 	}
 
@@ -24,9 +32,25 @@ public:
 		return m_height;
 	}
 
+	bool isAlive(Coord c) const
+	{
+		return m_cells[index(c)] > 0;
+	}
+
+	void setAlive(Coord c)
+	{
+		m_cells[index(c)] = 1;
+	}
+
 private:
+	int index(Coord c) const
+	{
+		return (c.y + 1) * (m_width + 2) + c.x + 1;
+	}
+
 	int m_width;
 	int m_height;
+	std::vector<uint8_t> m_cells;
 };
 
 class RLEParser
@@ -38,8 +62,14 @@ public:
 		m_input(input)
 	{}
 
-	std::unique_ptr<Board> parse() {
+	std::unique_ptr<Board> parse()
+	{
 		parseHeader();
+		unsigned int line = 0;
+		while (!readChar('!')) {
+			readLine(line);
+			++line;
+		}
 		return std::move(m_output);
 	}
 
@@ -63,7 +93,29 @@ private:
 		}
 	}
 
-	bool readString(const std::string& s) {
+	bool readLine(unsigned int line)
+	{
+		unsigned int column = 0;
+
+		while (!readChar('$')) {
+			unsigned int n = readInt() ? m_lastInt : 1;
+
+			if (readChar('o')) {
+				for (unsigned int i=column; i<column+n; ++i) {
+					m_output->setAlive({i, line});
+				}
+			} else if (!readChar('b')) {
+				return false;
+			}
+
+			column += n;
+		}
+
+		return true;
+	}
+
+	bool readString(const std::string& s)
+	{
 		for (unsigned int i=0; i<s.size(); ++i) {
 			if (s[i] != m_input[m_index]) {
 				return false;
@@ -75,7 +127,18 @@ private:
 		return true;
 	}
 
-	bool readInt() {
+	bool readChar(char c)
+	{
+		if (m_input[m_index] == c) {
+			++m_index;
+			return true;
+		}
+
+		return false;
+	}
+
+	bool readInt()
+	{
 		m_lastInt = 0;
 		unsigned int start = m_index;
 
@@ -88,7 +151,8 @@ private:
 		return m_index != start;
 	}
 
-	bool isDigit() const {
+	bool isDigit() const
+	{
 		return m_input[m_index] >= '0' && m_input[m_index] <= '9';
 	}
 

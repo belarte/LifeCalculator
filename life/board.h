@@ -116,12 +116,10 @@ private:
 
 	bool readString(const std::string& s)
 	{
-		for (unsigned int i=0; i<s.size(); ++i) {
-			if (s[i] != m_input[m_index]) {
+		for (char c : s) {
+			if (!readChar(c)) {
 				return false;
 			}
-
-			++m_index;
 		}
 
 		return true;

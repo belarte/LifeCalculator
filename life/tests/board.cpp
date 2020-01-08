@@ -9,7 +9,7 @@ using namespace life;
 
 TEST(BoardCreation, creates_with_correct_dimensions)
 {
-	auto board = life::FromRLE("x = 15, y = 6\n!");
+	auto board = life::FromRLE({"x = 15, y = 6\n!", {0, 0}});
 
 	ASSERT_EQ(15, board->width());
 	ASSERT_EQ(6, board->height());
@@ -17,7 +17,7 @@ TEST(BoardCreation, creates_with_correct_dimensions)
 
 TEST(BoardCreation, create_with_pattern)
 {
-	auto board = life::FromRLE(Glider);
+	auto board = life::FromRLE({Glider, {0, 0}});
 
 	std::vector<std::pair<Coord, bool>> dataset = {
 		{{0, 0}, false},

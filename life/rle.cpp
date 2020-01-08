@@ -114,9 +114,9 @@ private:
 
 } // end namespace
 
-std::unique_ptr<Board> FromRLE(const std::string& pattern)
+std::unique_ptr<Board> FromRLE(Input input)
 {
-	RLEParser parser(pattern);
+	RLEParser parser(input.pattern);
 	return parser.parse();
 }
 

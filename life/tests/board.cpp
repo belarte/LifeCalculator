@@ -1,4 +1,5 @@
 #include "../board.h"
+#include "../rle.h"
 #include "gtest/gtest.h"
 
 const std::string Glider = R"(x = 3, y = 3

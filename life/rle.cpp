@@ -1,5 +1,6 @@
 #include "rle.h"
 #include "board.h"
+#include <stdexcept>
 
 namespace life {
 
@@ -115,11 +116,5 @@ std::vector<Coord> FromRLE(const std::string& pattern)
 	RLEParser parser(pattern);
 	return parser.parse();
 }
-
-//std::unique_ptr<Board> Create(Input input)
-//{
-//	RLEParser parser(input.pattern);
-//	return parser.parse();
-//}
 
 } // end namespace

@@ -14,7 +14,7 @@ public:
 		m_input(input)
 	{}
 
-	std::unique_ptr<Board> parse()
+	std::vector<Coord> parse()
 	{
 		parseHeader();
 		unsigned int line = 0;
@@ -31,14 +31,10 @@ private:
 		if (!readString("x = ") || !readInt()) {
 			throw std::runtime_error("Header incorrect, cannot read width");
 		}
-		int width = m_lastInt;
 
 		if (!readString(", y = ") || !readInt()) {
 			throw std::runtime_error("Header incorrect, cannot read height");
 		}
-		int height = m_lastInt;
-
-		m_output = std::make_unique<Board>(width, height);
 
 		if (!readString("\n")) {
 			throw std::runtime_error("Header incorrect, missing new line");
@@ -54,7 +50,7 @@ private:
 
 			if (readChar('o')) {
 				for (unsigned int i=column; i<column+n; ++i) {
-					m_output->setAlive({i, line});
+					m_output.push_back({i, line});
 				}
 			} else if (!readChar('b')) {
 				return false;
@@ -109,16 +105,21 @@ private:
 	unsigned int m_index;
 	int m_lastInt;
 	const std::string m_input;
-	std::unique_ptr<Board> m_output;
+	std::vector<Coord> m_output;
 };
 
 } // end namespace
 
-std::unique_ptr<Board> FromRLE(Input input)
+std::vector<Coord> FromRLE(const std::string& pattern)
 {
-	RLEParser parser(input.pattern);
+	RLEParser parser(pattern);
 	return parser.parse();
 }
 
+//std::unique_ptr<Board> Create(Input input)
+//{
+//	RLEParser parser(input.pattern);
+//	return parser.parse();
+//}
 
 } // end namespace

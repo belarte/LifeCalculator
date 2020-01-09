@@ -1,11 +1,11 @@
 #pragma once
 
+#include "board.h"
 #include <string>
+#include <vector>
 #include <memory>
 
 namespace life {
-
-class Board;
 
 struct Offset {
 	const unsigned int x;
@@ -17,6 +17,8 @@ struct Input {
 	const Offset offset;
 };
 
-std::unique_ptr<Board> FromRLE(Input);
+std::vector<Coord> FromRLE(const std::string& pattern);
+
+//std::unique_ptr<Board> Create(Input);
 
 } // end namespace

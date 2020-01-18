@@ -4,9 +4,9 @@
 
 namespace life {
 
-std::unique_ptr<Board> Create(Input input)
+std::unique_ptr<Board> Create(Input input, Generator gen)
 {
-	auto coords = FromRLE(input.pattern);
+	auto coords = gen(input.pattern);
 
 	unsigned int width = 0, length = 0;
 	for (const auto c : coords) {

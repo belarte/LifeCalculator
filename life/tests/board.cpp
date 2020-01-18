@@ -13,7 +13,7 @@ using namespace life;
 
 TEST(BoardCreation, creates_with_dimension_from_pattern)
 {
-	auto board = life::Create({GospelGlider, {0, 0}});
+	auto board = life::Create({GospelGlider, {0, 0}}, FromRLE);
 
 	EXPECT_EQ(36, board->width());
 	EXPECT_EQ(9, board->height());
@@ -21,7 +21,7 @@ TEST(BoardCreation, creates_with_dimension_from_pattern)
 
 TEST(BoardCreation, create_with_pattern)
 {
-	auto board = life::Create({Glider, {0, 0}});
+	auto board = life::Create({Glider, {0, 0}}, FromRLE);
 
 	std::vector<std::pair<Coord, bool>> dataset = {
 		{{0, 0}, false},

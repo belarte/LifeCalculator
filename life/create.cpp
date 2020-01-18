@@ -19,7 +19,7 @@ std::unique_ptr<Board> Create(Input input, Generator gen)
 		board->setAlive(c);
 	}
 
-	return std::move(board);
+	return board;
 }
 
 } // end namespace

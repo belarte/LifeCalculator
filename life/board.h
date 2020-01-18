@@ -1,15 +1,10 @@
 #pragma once
 
+#include "types.h"
 #include <cstdint>
 #include <vector>
 
 namespace life {
-
-struct Coord
-{
-	unsigned int x;
-	unsigned int y;
-};
 
 class Board
 {

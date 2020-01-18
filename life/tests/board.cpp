@@ -1,27 +1,40 @@
 #include "../create.h"
 #include "../board.h"
 #include "../rle.h"
+
 #include "gtest/gtest.h"
-
-const std::string Glider = R"(x = 3, y = 3
-bo$2bo$3o!)";
-
-const std::string GospelGlider = R"(x = 36, y = 9
-24bo$22bobo$12b2o6b2o12b2o$11bo3bo4b2o12b2o$2o8bo5bo3b2o$2o8bo3bob2o4bobo$10bo5bo7bo$11bo3bo$12b2o!)";
+#include "gmock/gmock.h"
 
 using namespace life;
+using namespace testing;
 
-TEST(BoardCreation, creates_with_dimension_from_pattern)
+struct MockGenerator
 {
-	auto board = life::Create({GospelGlider, {0, 0}}, FromRLE);
+	MOCK_METHOD1(create, Coords(const std::string&));
+};
+
+struct BoardCreation : public Test
+{
+	MockGenerator mockGenerator;
+	Generator generator = [&](const std::string& s){ return mockGenerator.create(s); };
+};
+
+TEST_F(BoardCreation, creates_with_dimension_from_pattern)
+{
+	EXPECT_CALL(mockGenerator, create(_)).WillOnce(Return(Coords{ {35, 8} }));
+
+	auto board = life::Create({}, generator);
 
 	EXPECT_EQ(36, board->width());
 	EXPECT_EQ(9, board->height());
 }
 
-TEST(BoardCreation, create_with_pattern)
+TEST_F(BoardCreation, create_with_pattern)
 {
-	auto board = life::Create({Glider, {0, 0}}, FromRLE);
+	EXPECT_CALL(mockGenerator, create(_))
+		.WillOnce(Return(Coords{ {1, 0}, {2, 1}, {0, 2}, {1, 2}, {2, 2} }));
+
+	auto board = life::Create({}, generator);
 
 	std::vector<std::pair<Coord, bool>> dataset = {
 		{{0, 0}, false},

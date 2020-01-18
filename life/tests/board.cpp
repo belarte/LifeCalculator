@@ -19,6 +19,13 @@ struct BoardCreation : public Test
 	Generator generator = [&](const std::string& s){ return mockGenerator.create(s); };
 };
 
+TEST_F(BoardCreation, create_forwards_parameters_to_generator)
+{
+	EXPECT_CALL(mockGenerator, create("some input"));
+
+	auto board = life::Create({{"some input"}, {}}, generator);
+}
+
 TEST_F(BoardCreation, creates_with_dimension_from_pattern)
 {
 	EXPECT_CALL(mockGenerator, create(_)).WillOnce(Return(Coords{ {35, 8} }));

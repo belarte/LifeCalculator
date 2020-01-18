@@ -37,8 +37,8 @@ private:
 			throw std::runtime_error("Header incorrect, cannot read height");
 		}
 
-		if (!readString("\n")) {
-			throw std::runtime_error("Header incorrect, missing new line");
+		while (!readChar('\n')) {
+			// Skipping to end of the line
 		}
 	}
 

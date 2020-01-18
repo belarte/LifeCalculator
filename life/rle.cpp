@@ -1,5 +1,4 @@
 #include "rle.h"
-#include "board.h"
 #include <stdexcept>
 
 namespace life {
@@ -15,7 +14,7 @@ public:
 		m_input(input)
 	{}
 
-	std::vector<Coord> parse()
+	Coords parse()
 	{
 		parseHeader();
 		unsigned int line = 0;
@@ -106,12 +105,12 @@ private:
 	unsigned int m_index;
 	int m_lastInt;
 	const std::string m_input;
-	std::vector<Coord> m_output;
+	Coords m_output;
 };
 
 } // end namespace
 
-std::vector<Coord> FromRLE(const std::string& pattern)
+Coords FromRLE(const std::string& pattern)
 {
 	RLEParser parser(pattern);
 	return parser.parse();

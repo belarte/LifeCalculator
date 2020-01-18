@@ -20,7 +20,7 @@ TEST(FromRLE, create_with_pattern)
 {
 	auto coords = FromRLE(Glider);
 
-	std::vector<Coord> expected = {
+	Coords expected = {
 		{1, 0}, {2, 1}, {0, 2}, {1, 2}, {2, 2}
 	};
 

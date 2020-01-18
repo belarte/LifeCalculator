@@ -1,11 +1,11 @@
 #pragma once
 
 #include "board.h"
+#include "types.h"
 #include <string>
-#include <vector>
 
 namespace life {
 
-std::vector<Coord> FromRLE(const std::string& pattern);
+Coords FromRLE(const std::string& pattern);
 
 } // end namespace

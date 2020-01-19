@@ -28,12 +28,22 @@ TEST_F(BoardCreation, create_forwards_parameters_to_generator)
 
 TEST_F(BoardCreation, creates_with_dimension_from_pattern)
 {
-	EXPECT_CALL(mockGenerator, create(_)).WillOnce(Return(Coords{ {35, 8} }));
+	EXPECT_CALL(mockGenerator, create(_)).WillOnce(Return(Coords{ {0, 0}, {35, 8} }));
 
 	auto board = life::Create({}, generator);
 
 	EXPECT_EQ(36, board->width());
 	EXPECT_EQ(9, board->height());
+}
+
+TEST_F(BoardCreation, create_trims_size_when_pattern_does_not_start_at_origin)
+{
+	EXPECT_CALL(mockGenerator, create(_)).WillOnce(Return(Coords{ {3, 4} }));
+
+	auto board = life::Create({{""}, {}}, generator);
+
+	EXPECT_EQ(1, board->width());
+	EXPECT_EQ(1, board->height());
 }
 
 TEST_F(BoardCreation, create_with_pattern)

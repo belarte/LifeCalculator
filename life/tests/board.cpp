@@ -79,3 +79,15 @@ TEST_F(BoardCreation, create_with_pattern)
 		EXPECT_EQ(data.second, board->isAlive(data.first));
 	}
 }
+
+TEST_F(BoardCreation, create_with_multiple_patterns_and_offsets_return_board_with_correct_size)
+{
+	EXPECT_CALL(mockGenerator, create(_))
+		.WillOnce(Return(Coords{ {0, 0}, {3, 4} }))
+		.WillOnce(Return(Coords{ {0, 1}, {1, 0} }));
+
+	auto board = life::Create({ {{""}, {1, 2}}, {{""}, {6, 3}} }, generator);
+
+	EXPECT_EQ(7, board->width());
+	EXPECT_EQ(5, board->height());
+}

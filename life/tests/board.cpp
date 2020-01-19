@@ -30,7 +30,7 @@ TEST_F(BoardCreation, creates_with_dimension_from_pattern)
 {
 	EXPECT_CALL(mockGenerator, create(_)).WillOnce(Return(Coords{ {0, 0}, {35, 8} }));
 
-	auto board = life::Create({}, generator);
+	auto board = life::Create({{""}, {}}, generator);
 
 	EXPECT_EQ(36, board->width());
 	EXPECT_EQ(9, board->height());
@@ -46,12 +46,22 @@ TEST_F(BoardCreation, create_trims_size_when_pattern_does_not_start_at_origin)
 	EXPECT_EQ(1, board->height());
 }
 
+TEST_F(BoardCreation, create_trims_size_when_pattern_is_offset)
+{
+	EXPECT_CALL(mockGenerator, create(_)).WillOnce(Return(Coords{ {0, 0}, {3, 4} }));
+
+	auto board = life::Create({{""}, {1, 2}}, generator);
+
+	EXPECT_EQ(4, board->width());
+	EXPECT_EQ(5, board->height());
+}
+
 TEST_F(BoardCreation, create_with_pattern)
 {
 	EXPECT_CALL(mockGenerator, create(_))
 		.WillOnce(Return(Coords{ {1, 0}, {2, 1}, {0, 2}, {1, 2}, {2, 2} }));
 
-	auto board = life::Create({}, generator);
+	auto board = life::Create({{""}, {}}, generator);
 
 	std::vector<std::pair<Coord, bool>> dataset = {
 		{{0, 0}, false},

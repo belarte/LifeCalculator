@@ -5,15 +5,6 @@
 const std::string Glider = R"(x = 3, y = 3
 bo$2bo$3o!)";
 
-namespace life {
-
-bool operator==(const Coord& left, const Coord& right)
-{
-	return left.x == right.x && left.y == right.y;
-}
-
-}
-
 using namespace life;
 
 TEST(FromRLE, create_with_pattern)

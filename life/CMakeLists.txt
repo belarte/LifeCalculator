@@ -1,7 +1,11 @@
-add_library(life rle.cpp create.cpp)
+add_library(life
+	types.cpp
+	rle.cpp
+	create.cpp)
 
 add_executable(test_life
 	tests/main.cpp
+	tests/types.cpp
 	tests/board.cpp
 	tests/rle.cpp
 )

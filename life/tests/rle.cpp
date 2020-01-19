@@ -17,7 +17,7 @@ TEST(FromRLE, create_with_pattern)
 	};
 
 	EXPECT_EQ(expected.size(), coords.size());
-	for (unsigned int i=0; i<expected.size(); ++i) {
+	for (size_t i=0; i<expected.size(); ++i) {
 		EXPECT_EQ(expected[i], coords[i]);
 	}
 }

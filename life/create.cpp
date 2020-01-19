@@ -7,9 +7,9 @@ namespace life {
 
 std::unique_ptr<Board> Create(Inputs inputs, Generator gen)
 {
-	unsigned int width = 0, height = 0;
-	unsigned int xOrigin = std::numeric_limits<unsigned int>::max();
-	unsigned int yOrigin = std::numeric_limits<unsigned int>::max();
+	size_t width = 0, height = 0;
+	auto xOrigin = std::numeric_limits<size_t>::max();
+	auto yOrigin = std::numeric_limits<size_t>::max();
 
 	Coords coordinates;
 	for (const auto input : inputs) {

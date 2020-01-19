@@ -104,8 +104,8 @@ TEST_F(BoardCreation, create_with_multiple_patterns_and_offsets_sets_cells_corre
 
 	auto board = life::Create({ {{""}, {1, 2}}, {{""}, {6, 3}} }, generator);
 
-	for (unsigned int j=0; j<5; ++j) {
-		for (unsigned int i=0; i<7; ++i) {
+	for (size_t j=0; j<5; ++j) {
+		for (size_t i=0; i<7; ++i) {
 			bool isAlive = std::find(dataset.begin(), dataset.end(), Coord{i, j}) != dataset.end();
 			EXPECT_EQ(isAlive, board->isAlive({i, j}));
 		}

@@ -6,8 +6,8 @@ namespace life {
 
 struct Coord
 {
-	unsigned int x;
-	unsigned int y;
+	size_t x;
+	size_t y;
 };
 
 bool operator==(const Coord& left, const Coord& right);

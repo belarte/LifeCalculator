@@ -1,6 +1,6 @@
 #include "create.h"
-#include "rle.h"
 #include "board.h"
+
 #include <limits>
 
 namespace life {

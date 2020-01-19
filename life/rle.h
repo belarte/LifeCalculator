@@ -1,7 +1,7 @@
 #pragma once
 
-#include "board.h"
 #include "types.h"
+
 #include <string>
 
 namespace life {

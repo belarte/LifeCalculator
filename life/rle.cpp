@@ -1,4 +1,5 @@
 #include "rle.h"
+
 #include <stdexcept>
 
 namespace life {

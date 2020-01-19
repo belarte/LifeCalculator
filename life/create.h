@@ -14,8 +14,10 @@ struct Input {
 	const Coord offset;
 };
 
+using Inputs = std::vector<Input>;
+
 using Generator = std::function<Coords(const std::string&)>;
 
-std::unique_ptr<Board> Create(Input, Generator);
+std::unique_ptr<Board> Create(Inputs, Generator);
 
 } // end namespace

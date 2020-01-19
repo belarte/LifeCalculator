@@ -5,11 +5,11 @@
 
 namespace life {
 
-std::unique_ptr<Board> Create(Input input, Generator gen)
+std::unique_ptr<Board> Create(Inputs inputs, Generator gen)
 {
-	auto coords = gen(input.pattern);
-	auto xOffset = input.offset.x;
-	auto yOffset = input.offset.y;
+	auto coords = gen(inputs[0].pattern);
+	auto xOffset = inputs[0].offset.x;
+	auto yOffset = inputs[0].offset.y;
 
 	unsigned int width = 0, height = 0;
 	unsigned int xOrigin = std::numeric_limits<unsigned int>::max();

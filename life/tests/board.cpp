@@ -2,6 +2,8 @@
 #include "../board.h"
 #include "../rle.h"
 
+#include <algorithm>
+
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
@@ -90,4 +92,22 @@ TEST_F(BoardCreation, create_with_multiple_patterns_and_offsets_return_board_wit
 
 	EXPECT_EQ(7, board->width());
 	EXPECT_EQ(5, board->height());
+}
+
+TEST_F(BoardCreation, create_with_multiple_patterns_and_offsets_sets_cells_correctly)
+{
+	auto dataset = std::vector<Coord>{ {0, 0}, {6, 1}, {5, 2}, {3, 4} };
+
+	EXPECT_CALL(mockGenerator, create(_))
+		.WillOnce(Return(Coords{ {0, 0}, {3, 4} }))
+		.WillOnce(Return(Coords{ {0, 1}, {1, 0} }));
+
+	auto board = life::Create({ {{""}, {1, 2}}, {{""}, {6, 3}} }, generator);
+
+	for (unsigned int j=0; j<5; ++j) {
+		for (unsigned int i=0; i<7; ++i) {
+			bool isAlive = std::find(dataset.begin(), dataset.end(), Coord{i, j}) != dataset.end();
+			EXPECT_EQ(isAlive, board->isAlive({i, j}));
+		}
+	}
 }

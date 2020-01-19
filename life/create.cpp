@@ -22,14 +22,14 @@ std::unique_ptr<Board> Create(Inputs inputs, Generator gen)
 			yOrigin = std::min(yOrigin, c.y + yOffset);
 			width = std::max(width, c.x + xOffset);
 			height = std::max(height, c.y + yOffset);
-		}
 
-		coordinates.insert(coordinates.end(), coords.begin(), coords.end());
+			coordinates.push_back(c + Coord{xOffset, yOffset});
+		}
 	}
 
 	auto board = std::make_unique<Board>(width+1-xOrigin, height+1-yOrigin);
 	for (const auto c : coordinates) {
-		board->setAlive(c);
+		board->setAlive(c - Coord{xOrigin, yOrigin});
 	}
 
 	return board;

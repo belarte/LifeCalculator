@@ -9,7 +9,7 @@ namespace life {
 class Board
 {
 public:
-	Board(int w, int h) :
+	Board(unsigned int w, unsigned int h) :
 		m_width{w},
 		m_height{h},
 		m_cells((m_width+2) * (m_height+2), 0)
@@ -37,13 +37,13 @@ public:
 	}
 
 private:
-	int index(Coord c) const
+	unsigned int index(Coord c) const
 	{
 		return (c.y + 1) * (m_width + 2) + c.x + 1;
 	}
 
-	int m_width;
-	int m_height;
+	unsigned int m_width;
+	unsigned int m_height;
 	std::vector<uint8_t> m_cells;
 };
 

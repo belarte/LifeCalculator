@@ -14,16 +14,16 @@ std::unique_ptr<Board> Create(Inputs inputs, Generator gen)
 	Coords coordinates;
 	for (const auto input : inputs) {
 		auto coords = gen(input.pattern);
-		auto xOffset = input.offset.x;
-		auto yOffset = input.offset.y;
 
-		for (const auto c : coords) {
-			xOrigin = std::min(xOrigin, c.x + xOffset);
-			yOrigin = std::min(yOrigin, c.y + yOffset);
-			width = std::max(width, c.x + xOffset);
-			height = std::max(height, c.y + yOffset);
+		for (const auto offset : input.offsets) {
+			for (const auto c : coords) {
+				xOrigin = std::min(xOrigin, c.x + offset.x);
+				yOrigin = std::min(yOrigin, c.y + offset.y);
+				width = std::max(width, c.x + offset.x);
+				height = std::max(height, c.y + offset.y);
 
-			coordinates.push_back(c + Coord{xOffset, yOffset});
+				coordinates.push_back(c + Coord{offset.x, offset.y});
+			}
 		}
 	}
 

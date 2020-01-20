@@ -12,7 +12,7 @@ class Board;
 
 struct Input {
 	const std::string pattern;
-	const Coord offset;
+	const Coords offsets;
 };
 
 using Inputs = std::vector<Input>;

@@ -60,25 +60,18 @@ TEST_F(BoardCreation, create_trims_size_when_pattern_is_offset)
 
 TEST_F(BoardCreation, create_with_pattern)
 {
+	auto dataset = std::vector<Coord>{ {1, 0}, {2, 1}, {0, 2}, {1, 2}, {2, 2} };
+
 	EXPECT_CALL(mockGenerator, create(_))
 		.WillOnce(Return(Coords{ {1, 0}, {2, 1}, {0, 2}, {1, 2}, {2, 2} }));
 
 	auto board = life::Create(irrelevantInput, generator);
 
-	std::vector<std::pair<Coord, bool>> dataset = {
-		{{0, 0}, false},
-		{{1, 0}, true},
-		{{2, 0}, false},
-		{{0, 1}, false},
-		{{1, 1}, false},
-		{{2, 1}, true},
-		{{0, 2}, true},
-		{{1, 2}, true},
-		{{2, 2}, true}
-	};
-
-	for (auto& data : dataset) {
-		EXPECT_EQ(data.second, board->isAlive(data.first));
+	for (size_t j=0; j<3; ++j) {
+		for (size_t i=0; i<3; ++i) {
+			bool isAlive = std::find(dataset.begin(), dataset.end(), Coord{i, j}) != dataset.end();
+			EXPECT_EQ(isAlive, board->isAlive({i, j}));
+		}
 	}
 }
 

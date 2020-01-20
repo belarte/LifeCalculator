@@ -3,17 +3,11 @@
 
 #include "gtest/gtest.h"
 
-const std::string Glider = R"(x = 3, y = 3
-bo$2bo$3o!)";
-
-const std::string Eater = R"(x = 9, y = 6
-3b2o2b2o$o3bo2b2o$4o$$2o$2o!)";
-
 using namespace life;
 
 TEST(FromRLE, create_with_pattern_glider)
 {
-	auto coords = FromRLE(Glider);
+	auto coords = FromRLE(rle::Glider);
 
 	Coords expected = {
 		{1, 0}, {2, 1}, {0, 2}, {1, 2}, {2, 2}
@@ -27,7 +21,7 @@ TEST(FromRLE, create_with_pattern_glider)
 
 TEST(FromRLE, create_with_pattern_eater)
 {
-	auto coords = FromRLE(Eater);
+	auto coords = FromRLE(rle::Eater);
 
 	Coords expected = {
 		{3, 0}, {4, 0}, {7, 0}, {8, 0},

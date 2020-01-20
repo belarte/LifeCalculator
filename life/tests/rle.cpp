@@ -2,8 +2,10 @@
 #include "../rle.h"
 
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
 
 using namespace life;
+using namespace testing;
 
 TEST(FromRLE, create_with_pattern_glider)
 {
@@ -13,10 +15,8 @@ TEST(FromRLE, create_with_pattern_glider)
 		{1, 0}, {2, 1}, {0, 2}, {1, 2}, {2, 2}
 	};
 
-	EXPECT_EQ(expected.size(), coords.size());
-	for (size_t i=0; i<expected.size(); ++i) {
-		EXPECT_EQ(expected[i], coords[i]);
-	}
+	EXPECT_THAT(coords, SizeIs(5));
+	EXPECT_THAT(coords, UnorderedElementsAreArray(expected));
 }
 
 TEST(FromRLE, create_with_pattern_eater)
@@ -31,8 +31,6 @@ TEST(FromRLE, create_with_pattern_eater)
 		{0, 5}, {1, 5}
 	};
 
-	EXPECT_EQ(expected.size(), coords.size());
-	for (size_t i=0; i<expected.size(); ++i) {
-		EXPECT_EQ(expected[i], coords[i]);
-	}
+	EXPECT_THAT(coords, SizeIs(16));
+	EXPECT_THAT(coords, UnorderedElementsAreArray(expected));
 }

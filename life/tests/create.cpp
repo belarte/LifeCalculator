@@ -1,6 +1,5 @@
 #include "../create.h"
 #include "../board.h"
-#include "../rle.h"
 
 #include <algorithm>
 

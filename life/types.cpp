@@ -17,4 +17,10 @@ Coord operator-(Coord left, Coord right)
 	return {left.x - right.x, left.y - right.y};
 }
 
+std::ostream& operator<<(std::ostream& oss, const Coord& c)
+{
+	oss << "(" << c.x << ", " << c.y << ")";
+	return oss;
+}
+
 } //end namespace

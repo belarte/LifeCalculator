@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ostream>
 #include <vector>
 
 namespace life {
@@ -14,6 +15,8 @@ bool operator==(const Coord& left, const Coord& right);
 
 Coord operator+(Coord left, Coord right);
 Coord operator-(Coord left, Coord right);
+
+std::ostream& operator<<(std::ostream&, const Coord&);
 
 using Coords = std::vector<Coord>;
 

@@ -40,10 +40,14 @@ void Board::simulate()
 			if (isAlive(c)) {
 				if (count == 2 || count == 3) {
 					m_cells[nextLayer()].at(index(c)) = 1;
+				} else {
+					m_cells[nextLayer()].at(index(c)) = 0;
 				}
 			} else {
 				if (count == 3) {
 					m_cells[nextLayer()].at(index(c)) = 1;
+				} else {
+					m_cells[nextLayer()].at(index(c)) = 0;
 				}
 			}
 		}

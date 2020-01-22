@@ -49,6 +49,24 @@ TEST(BoardSimulation, simulate_changes_change_board_with_glider_pattern)
 	for (size_t j=0; j<4; ++j) {
 		for (size_t i=0; i<4; ++i) {
 			bool isAlive = std::find(expected.begin(), expected.end(), Coord{i, j}) != expected.end();
+			EXPECT_EQ(isAlive, unit.isAlive({i, j}));
+		}
+	}
+}
+
+TEST(BoardSimulation, multiple_simulate_changes_change_board_with_glider_pattern)
+{
+	Coords expected = { {2, 1}, {3, 2}, {1, 3}, {2, 3}, {3, 3} };
+
+	auto unit = prepareBoard(4, 4, Glider);
+	unit.simulate();
+	unit.simulate();
+	unit.simulate();
+	unit.simulate();
+
+	for (size_t j=0; j<4; ++j) {
+		for (size_t i=0; i<4; ++i) {
+			bool isAlive = std::find(expected.begin(), expected.end(), Coord{i, j}) != expected.end();
 			EXPECT_EQ(isAlive, unit.isAlive({i, j})) << Coord{i, j} << " is " << isAlive;
 		}
 	}

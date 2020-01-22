@@ -6,10 +6,11 @@ add_library(life
 )
 
 add_executable(test_life
-	tests/main.cpp
-	tests/types.cpp
+	tests/board.cpp
 	tests/create.cpp
+	tests/main.cpp
 	tests/rle.cpp
+	tests/types.cpp
 )
 
 target_link_libraries(test_life life)

@@ -1,7 +1,8 @@
 add_library(life
-	types.cpp
-	rle.cpp
+	board.cpp
 	create.cpp
+	rle.cpp
+	types.cpp
 )
 
 add_executable(test_life

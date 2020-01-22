@@ -10,38 +10,14 @@ namespace life {
 class Board
 {
 public:
-	Board(size_t w, size_t h) :
-		m_width{w},
-		m_height{h},
-		m_cells((m_width+2) * (m_height+2), 0)
-	{
-	}
-
-	int width() const
-	{
-		return m_width;
-	}
-
-	int height() const
-	{
-		return m_height;
-	}
-
-	bool isAlive(Coord c) const
-	{
-		return m_cells[index(c)] > 0;
-	}
-
-	void setAlive(Coord c)
-	{
-		m_cells[index(c)] = 1;
-	}
+	Board(size_t w, size_t h);
+	int width() const;
+	int height() const;
+	bool isAlive(Coord c) const;
+	void setAlive(Coord c);
 
 private:
-	size_t index(Coord c) const
-	{
-		return (c.y + 1) * (m_width + 2) + c.x + 1;
-	}
+	size_t index(Coord c) const;
 
 	size_t m_width;
 	size_t m_height;

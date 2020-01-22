@@ -21,12 +21,12 @@ int Board::height() const
 
 bool Board::isAlive(Coord c) const
 {
-	return m_cells[index(c)] > 0;
+	return m_cells.at(index(c)) > 0;
 }
 
 void Board::setAlive(Coord c)
 {
-	m_cells[index(c)] = 1;
+	m_cells.at(index(c)) = 1;
 }
 
 size_t Board::index(Coord c) const

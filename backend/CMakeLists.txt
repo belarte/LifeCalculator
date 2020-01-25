@@ -8,6 +8,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS "ON")
 
 include_directories(.)
 
+find_package(Boost REQUIRED COMPONENTS system)
+include_directories(${Boost_INCLUDE_DIRS})
+
 enable_testing()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})

@@ -42,3 +42,7 @@ tags
 
 # Vim temporaries
 *.swp
+
+# pytest
+.pytest_cache
+__pycache__

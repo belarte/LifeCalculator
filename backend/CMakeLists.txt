@@ -16,4 +16,5 @@ function(linkTestLibraries exec)
 	target_link_libraries(${exec} gmock ${GTEST_BOTH_LIBRARIES} pthread)
 endfunction()
 
+add_subdirectory(app)
 add_subdirectory(life)

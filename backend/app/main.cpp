@@ -1,8 +1,6 @@
 #include <boost/beast/core/buffers_to_string.hpp>
 #include <boost/beast/websocket.hpp>
 
-using namespace boost::beast::websocket;
-
 class Websocket
 {
 public:

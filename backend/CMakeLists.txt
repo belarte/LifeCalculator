@@ -20,5 +20,6 @@ function(linkTestLibraries exec)
 endfunction()
 
 add_subdirectory(app)
+add_subdirectory(expression)
 add_subdirectory(life)
 add_subdirectory(websocket)

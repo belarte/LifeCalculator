@@ -1,11 +1,11 @@
+#include "expression/parser.h"
 #include "websocket/websocket.h"
 
 int main(int, char**)
 {
 	try {
-		std::map<std::string, std::string> communications{
-			{"expr=0", "nothing"},
-			{"expr=1", "data: x = 3, y = 3\nbo$2bo$3o!"}
+		ws::Websocket::Communications communications{
+			{ "expr=", [](const std::string& s) { return expression::Parser{}.parse(s); } },
 		};
 
 		ws::Websocket ws{communications};

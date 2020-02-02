@@ -31,7 +31,7 @@ public:
 				reply = "ctrl: shutdown";
 				m_continue = false;
 			} else if (msg.rfind("app: ", 0) == 0) {
-				reply = processAppMessages(msg);
+				reply = processAppMessages( { msg.begin()+5, msg.end() } );
 			} else {
 				reply = "ctrl: unknown message";
 			}
@@ -44,13 +44,13 @@ public:
 private:
 	const std::string processAppMessages(const std::string& msg) {
 		std::map<std::string, std::string> communications{
-			{"app: expr=0", "app: nothing"},
-			{"app: expr=1", "app: data: x = 3, y = 3\nbo$2bo$3o!"}
+			{"expr=0", "nothing"},
+			{"expr=1", "data: x = 3, y = 3\nbo$2bo$3o!"}
 		};
 
 		auto check = communications.find(msg);
 		if (check != communications.end()) {
-			return check->second;
+			return std::string{"app: "}.append(check->second);
 		}
 
 		return "";

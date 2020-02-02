@@ -4,7 +4,7 @@
 
 namespace ws {
 
-Websocket::Websocket(const std::map<std::string, std::string> comms) :
+Websocket::Websocket(Communications comms) :
 	m_appCommunications{comms},
 	m_continue{true}
 {
@@ -41,9 +41,11 @@ void Websocket::run() {
 }
 
 const std::string Websocket::processAppMessages(const std::string& msg) {
-	auto check = m_appCommunications.find(msg);
-	if (check != m_appCommunications.end()) {
-		return std::string{"app: "}.append(check->second);
+	for (const auto& comm : m_appCommunications) {
+		if (msg.rfind(comm.first, 0) == 0) {
+			std::string content{ msg.begin() + comm.first.size(), msg.end() };
+			return std::string{"app: "}.append(comm.second(content));
+		}
 	}
 
 	return "";

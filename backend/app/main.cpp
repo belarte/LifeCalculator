@@ -6,7 +6,8 @@ using namespace boost::beast::websocket;
 class Websocket
 {
 public:
-	Websocket() :
+	Websocket(const std::map<std::string, std::string> comms) :
+		m_appCommunications{comms},
 		m_continue{true}
 	{
 		const boost::asio::ip::address address = boost::asio::ip::make_address("127.0.0.1");
@@ -43,13 +44,8 @@ public:
 
 private:
 	const std::string processAppMessages(const std::string& msg) {
-		std::map<std::string, std::string> communications{
-			{"expr=0", "nothing"},
-			{"expr=1", "data: x = 3, y = 3\nbo$2bo$3o!"}
-		};
-
-		auto check = communications.find(msg);
-		if (check != communications.end()) {
+		auto check = m_appCommunications.find(msg);
+		if (check != m_appCommunications.end()) {
 			return std::string{"app: "}.append(check->second);
 		}
 
@@ -57,13 +53,19 @@ private:
 	}
 
 	std::unique_ptr<boost::beast::websocket::stream<boost::asio::ip::tcp::socket>> m_websocket;
+	std::map<std::string, std::string> m_appCommunications;
 	bool m_continue;
 };
 
 int main(int, char**)
 {
 	try {
-		Websocket ws;
+		std::map<std::string, std::string> communications{
+			{"expr=0", "nothing"},
+			{"expr=1", "data: x = 3, y = 3\nbo$2bo$3o!"}
+		};
+
+		Websocket ws{communications};
 		ws.run();
 	} catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << std::endl;

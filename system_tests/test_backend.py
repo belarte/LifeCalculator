@@ -49,7 +49,7 @@ def test_setup_with_1_returns_one_glider(app):
         async with websockets.connect(uri) as websocket:
             await websocket.send('app: expr=1')
             ack = await websocket.recv()
-            assert ack.strip('\x00') == "app: data: x = 3, y = 3\nbo$2bo$3o!"
+            assert ack.strip('\x00') == "app: x = 3, y = 3\nbo$2bo$3o!"
             await websocket.send('ctrl: exit')
             ack = await websocket.recv()
             assert ack.strip('\x00') == "ctrl: shutdown"

@@ -1,3 +1,4 @@
+#include "life/board.h"
 #include <memory>
 #include <string>
 
@@ -6,7 +7,7 @@ namespace expression {
 class Expression
 {
 public:
-	virtual std::string evaluate() = 0;
+	virtual life::Board evaluate() = 0;
 };
 
 class Parser

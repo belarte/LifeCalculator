@@ -16,6 +16,10 @@ const std::string Eater = R"(x = 9, y = 6
 
 } // end namespace
 
+class Board;
+
 Coords FromRLE(const std::string& pattern);
+
+std::string ToRLE(Board&);
 
 } // end namespace

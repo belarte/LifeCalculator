@@ -1,7 +1,8 @@
 #include "expression/parser.h"
+#include "life/rle.h"
 #include "websocket/websocket.h"
 
-std::string Create(const std::string& input)
+life::Board Create(const std::string& input)
 {
 	auto expr = expression::Parser{}.parse(input);
 	return expr->evaluate();
@@ -11,7 +12,10 @@ int main(int, char**)
 {
 	try {
 		ws::Websocket::Communications communications{
-			{ "expr=", [](const std::string& s) { return Create(s); } },
+			{"expr=", [](const std::string& s) {
+				auto board = Create(s);
+				return ToRLE(board);
+			}},
 		};
 
 		ws::Websocket ws{communications};

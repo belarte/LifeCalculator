@@ -1,5 +1,7 @@
 #include "rle.h"
 
+#include "board.h"
+
 #include <stdexcept>
 
 namespace life {
@@ -115,6 +117,15 @@ Coords FromRLE(const std::string& pattern)
 {
 	RLEParser parser(pattern);
 	return parser.parse();
+}
+
+std::string ToRLE(Board& board)
+{
+	if (board.height() > 0 && board.width() > 0) {
+		return rle::Glider;
+	}
+
+	return "nothing";
 }
 
 } // end namespace

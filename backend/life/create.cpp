@@ -5,7 +5,7 @@
 
 namespace life {
 
-std::unique_ptr<Board> Create(Inputs inputs, Generator gen)
+Board Create(Inputs inputs, Generator gen)
 {
 	size_t width = 0, height = 0;
 	auto xOrigin = std::numeric_limits<size_t>::max();
@@ -27,9 +27,9 @@ std::unique_ptr<Board> Create(Inputs inputs, Generator gen)
 		}
 	}
 
-	auto board = std::make_unique<Board>(width+1-xOrigin, height+1-yOrigin);
+	auto board = Board(width+1-xOrigin, height+1-yOrigin);
 	for (const auto c : coordinates) {
-		board->setAlive(c - Coord{xOrigin, yOrigin});
+		board.setAlive(c - Coord{xOrigin, yOrigin});
 	}
 
 	return board;

@@ -34,8 +34,8 @@ TEST_F(BoardCreation, creates_with_dimension_from_pattern)
 
 	auto board = life::Create(irrelevantInput, generator);
 
-	EXPECT_EQ(36, board->width());
-	EXPECT_EQ(9, board->height());
+	EXPECT_EQ(36, board.width());
+	EXPECT_EQ(9, board.height());
 }
 
 TEST_F(BoardCreation, create_trims_size_when_pattern_does_not_start_at_origin)
@@ -44,8 +44,8 @@ TEST_F(BoardCreation, create_trims_size_when_pattern_does_not_start_at_origin)
 
 	auto board = life::Create(irrelevantInput, generator);
 
-	EXPECT_EQ(1, board->width());
-	EXPECT_EQ(1, board->height());
+	EXPECT_EQ(1, board.width());
+	EXPECT_EQ(1, board.height());
 }
 
 TEST_F(BoardCreation, create_trims_size_when_pattern_is_offset)
@@ -54,8 +54,8 @@ TEST_F(BoardCreation, create_trims_size_when_pattern_is_offset)
 
 	auto board = life::Create({ {{""}, Coords{{1, 2}}} }, generator);
 
-	EXPECT_EQ(4, board->width());
-	EXPECT_EQ(5, board->height());
+	EXPECT_EQ(4, board.width());
+	EXPECT_EQ(5, board.height());
 }
 
 TEST_F(BoardCreation, create_with_pattern)
@@ -70,7 +70,7 @@ TEST_F(BoardCreation, create_with_pattern)
 	for (size_t j=0; j<3; ++j) {
 		for (size_t i=0; i<3; ++i) {
 			bool isAlive = std::find(dataset.begin(), dataset.end(), Coord{i, j}) != dataset.end();
-			EXPECT_EQ(isAlive, board->isAlive({i, j}));
+			EXPECT_EQ(isAlive, board.isAlive({i, j}));
 		}
 	}
 }
@@ -83,8 +83,8 @@ TEST_F(BoardCreation, create_with_multiple_patterns_and_offsets_return_board_wit
 
 	auto board = life::Create({ {{""}, Coords{{1, 2}}}, {{""}, Coords{{6, 3}}} }, generator);
 
-	EXPECT_EQ(7, board->width());
-	EXPECT_EQ(5, board->height());
+	EXPECT_EQ(7, board.width());
+	EXPECT_EQ(5, board.height());
 }
 
 TEST_F(BoardCreation, create_with_multiple_patterns_and_offsets_sets_cells_correctly)
@@ -100,7 +100,7 @@ TEST_F(BoardCreation, create_with_multiple_patterns_and_offsets_sets_cells_corre
 	for (size_t j=0; j<5; ++j) {
 		for (size_t i=0; i<7; ++i) {
 			bool isAlive = std::find(dataset.begin(), dataset.end(), Coord{i, j}) != dataset.end();
-			EXPECT_EQ(isAlive, board->isAlive({i, j}));
+			EXPECT_EQ(isAlive, board.isAlive({i, j}));
 		}
 	}
 }
@@ -116,7 +116,7 @@ TEST_F(BoardCreation, create_with_one_pattern_with_multiple_offsets)
 	for (size_t j=0; j<4; ++j) {
 		for (size_t i=0; i<7; ++i) {
 			bool isAlive = std::find(dataset.begin(), dataset.end(), Coord{i, j}) != dataset.end();
-			EXPECT_EQ(isAlive, board->isAlive({i, j}));
+			EXPECT_EQ(isAlive, board.isAlive({i, j}));
 		}
 	}
 }

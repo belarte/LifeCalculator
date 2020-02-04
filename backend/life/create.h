@@ -19,6 +19,6 @@ using Inputs = std::vector<Input>;
 
 using Generator = std::function<Coords(const std::string&)>;
 
-std::unique_ptr<Board> Create(Inputs, Generator);
+Board Create(Inputs, Generator);
 
 } // end namespace

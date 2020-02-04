@@ -11,8 +11,8 @@ class Board
 {
 public:
 	Board(size_t w, size_t h);
-	int width() const;
-	int height() const;
+	size_t width() const;
+	size_t height() const;
 	bool isAlive(Coord c) const;
 	void setAlive(Coord c);
 

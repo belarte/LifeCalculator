@@ -10,12 +10,12 @@ Board::Board(size_t w, size_t h) :
 {
 }
 
-int Board::width() const
+size_t Board::width() const
 {
 	return m_width;
 }
 
-int Board::height() const
+size_t Board::height() const
 {
 	return m_height;
 }

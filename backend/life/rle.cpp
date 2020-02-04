@@ -2,6 +2,7 @@
 
 #include "board.h"
 
+#include <sstream>
 #include <stdexcept>
 
 namespace life {
@@ -119,10 +120,49 @@ Coords FromRLE(const std::string& pattern)
 	return parser.parse();
 }
 
+
 std::string ToRLE(Board& board)
 {
 	if (board.height() > 0 && board.width() > 0) {
-		return rle::Glider;
+		std::ostringstream oss;
+		oss << "x = " << board.width() << ", y = " << board.height() << "\n";
+		for (size_t j=0; j<board.height(); ++j) {
+			std::string line;
+			for (size_t i=0; i<board.width(); ++i) {
+				line += board.isAlive({i, j}) ? 'o' : 'b';
+			}
+
+			while (line.back() == 'b') {
+				line.pop_back();
+			}
+
+			if (line.empty()) {
+				oss << "$";
+				continue;
+			}
+
+			char current = line.front();
+			int count = 1;
+
+			for (size_t i=1; i<line.size(); ++i) {
+				char c = line[i];
+				if (current == c) {
+					++count;
+				} else {
+					if (count > 1) {
+						oss << count;
+					}
+					oss << current;
+					current = c;
+					count = 1;
+				}
+			}
+			if (count > 1) {
+				oss << count;
+			}
+			oss << current << (j == board.height()-1 ? '!' : '$');
+		}
+		return oss.str();
 	}
 
 	return "nothing";

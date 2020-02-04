@@ -1,6 +1,7 @@
 #include "parser.h"
 #include "life/board.h"
-#include <cstdlib>
+#include "life/create.h"
+#include "life/rle.h"
 
 namespace expression {
 
@@ -12,7 +13,8 @@ public:
 	{}
 
 	life::Board evaluate() override {
-		return  m_value == 1 ? life::Board{1, 1} : life::Board{0, 0};
+		life::Input input{life::rle::Glider, life::Coords{ {0, 0} }};
+		return  m_value == 1 ? life::Create({input}, life::FromRLE) : life::Board{0, 0};
 	}
 
 private:

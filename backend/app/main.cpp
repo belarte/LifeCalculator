@@ -1,11 +1,17 @@
 #include "expression/parser.h"
 #include "websocket/websocket.h"
 
+std::string Create(const std::string& input)
+{
+	auto expr = expression::Parser{}.parse(input);
+	return expr->evaluate();
+}
+
 int main(int, char**)
 {
 	try {
 		ws::Websocket::Communications communications{
-			{ "expr=", [](const std::string& s) { return expression::Parser{}.parse(s); } },
+			{ "expr=", [](const std::string& s) { return Create(s); } },
 		};
 
 		ws::Websocket ws{communications};

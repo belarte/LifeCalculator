@@ -2,6 +2,7 @@
 #include "life/board.h"
 #include "life/create.h"
 #include "life/rle.h"
+#include "utils/parser.h"
 
 namespace expression {
 
@@ -22,7 +23,9 @@ private:
 };
 
 std::unique_ptr<Expression> Parser::parse(const std::string& input) {
-	int value = atoi(input.c_str());
+	utils::Parser parser{input};
+	parser.readInt();
+	int value = parser.lastInt();
 	return std::make_unique<ConstExpression>(value);
 }
 

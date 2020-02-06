@@ -8,7 +8,8 @@ Parser::Parser(const std::string& input) :
 	m_input(input)
 {}
 
-void Parser::skipWhitespaces() {
+void Parser::skipWhitespaces()
+{
 	while (isWhitespace()) {
 		++m_index;
 	}
@@ -28,7 +29,8 @@ bool Parser::readInt()
 	return m_index != start;
 }
 
-uint32_t Parser::lastInt() const {
+uint32_t Parser::lastInt() const
+{
 	return m_lastInt;
 }
 
@@ -56,11 +58,13 @@ bool Parser::readString(const std::string& s)
 	return true;
 }
 
-bool Parser::isDigit() const {
+bool Parser::isDigit() const
+{
 	return m_input[m_index] >= '0' && m_input[m_index] <= '9';
 }
 
-bool Parser::isWhitespace() const {
+bool Parser::isWhitespace() const
+{
 	std::string whitespaces = {' ', '\n', '\t'};
 	return whitespaces.find(m_input[m_index]) != std::string::npos;
 }

@@ -1,6 +1,6 @@
 #include "rle.h"
-
 #include "board.h"
+#include "utils/parser.h"
 
 #include <sstream>
 #include <stdexcept>
@@ -13,16 +13,14 @@ class RLEParser
 {
 public:
 	RLEParser(const std::string& input) :
-		m_index{0},
-		m_lastInt{0},
-		m_input(input)
+		m_parser{input}
 	{}
 
 	Coords parse()
 	{
 		parseHeader();
 		unsigned int line = 0;
-		while (!readChar('!')) {
+		while (!m_parser.readChar('!')) {
 			readLine(line);
 			++line;
 		}
@@ -32,15 +30,15 @@ public:
 private:
 	void parseHeader()
 	{
-		if (!readString("x = ") || !readInt()) {
+		if (!m_parser.readString("x = ") || !m_parser.readInt()) {
 			throw std::runtime_error("Header incorrect, cannot read width");
 		}
 
-		if (!readString(", y = ") || !readInt()) {
+		if (!m_parser.readString(", y = ") || !m_parser.readInt()) {
 			throw std::runtime_error("Header incorrect, cannot read height");
 		}
 
-		while (!readChar('\n')) {
+		while (!m_parser.readChar('\n')) {
 			// Skipping to end of the line
 		}
 	}
@@ -49,14 +47,14 @@ private:
 	{
 		unsigned int column = 0;
 
-		while (!readChar('$')) {
-			unsigned int n = readInt() ? m_lastInt : 1;
+		while (!m_parser.readChar('$')) {
+			unsigned int n = m_parser.readInt() ? m_parser.lastInt() : 1;
 
-			if (readChar('o')) {
+			if (m_parser.readChar('o')) {
 				for (unsigned int i=column; i<column+n; ++i) {
 					m_output.push_back({i, line});
 				}
-			} else if (!readChar('b')) {
+			} else if (!m_parser.readChar('b')) {
 				return false;
 			}
 
@@ -66,49 +64,7 @@ private:
 		return true;
 	}
 
-	bool readString(const std::string& s)
-	{
-		for (char c : s) {
-			if (!readChar(c)) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	bool readChar(char c)
-	{
-		if (m_input[m_index] == c) {
-			++m_index;
-			return true;
-		}
-
-		return false;
-	}
-
-	bool readInt()
-	{
-		m_lastInt = 0;
-		unsigned int start = m_index;
-
-		while (isDigit()) {
-			m_lastInt *= 10;
-			m_lastInt += m_input[m_index] - '0';
-			++m_index;
-		}
-
-		return m_index != start;
-	}
-
-	bool isDigit() const
-	{
-		return m_input[m_index] >= '0' && m_input[m_index] <= '9';
-	}
-
-	unsigned int m_index;
-	int m_lastInt;
-	const std::string m_input;
+	utils::Parser m_parser;
 	Coords m_output;
 };
 

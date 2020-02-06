@@ -5,6 +5,8 @@ add_library(life
 	types.cpp
 )
 
+target_link_libraries(life utils)
+
 add_executable(test_life
 	tests/board.cpp
 	tests/create.cpp

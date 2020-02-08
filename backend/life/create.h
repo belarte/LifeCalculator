@@ -10,13 +10,6 @@ namespace life {
 
 class Board;
 
-struct Input {
-	const std::string pattern;
-	const Coords offsets;
-};
-
-using Inputs = std::vector<Input>;
-
 using Generator = std::function<Coords(const std::string&)>;
 
 Board Create(Inputs, Generator);

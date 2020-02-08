@@ -1,5 +1,7 @@
 #include "life/types.h"
 
+#include <memory>
+
 namespace expression {
 
 class Expression
@@ -18,6 +20,18 @@ public:
 private:
 	uint8_t m_value;
 	uint8_t m_spacing;
+};
+
+class OutputExpression : public Expression
+{
+public:
+	OutputExpression(std::unique_ptr<Expression> expr);
+
+	life::Inputs evaluate() override;
+
+private:
+	std::unique_ptr<Expression> m_input;
+	uint8_t m_offset;
 };
 
 } // end namespace

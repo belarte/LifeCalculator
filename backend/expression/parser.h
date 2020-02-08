@@ -7,7 +7,7 @@ namespace expression {
 class Expression
 {
 public:
-	virtual life::Board evaluate() = 0;
+	virtual life::Inputs evaluate() = 0;
 };
 
 class Parser

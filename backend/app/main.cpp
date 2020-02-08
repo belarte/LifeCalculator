@@ -1,11 +1,12 @@
 #include "expression/parser.h"
+#include "life/create.h"
 #include "life/rle.h"
 #include "websocket/websocket.h"
 
 life::Board Create(const std::string& input)
 {
 	auto expr = expression::Parser{}.parse(input);
-	return expr->evaluate();
+	return life::Create(expr->evaluate(), life::FromRLE);
 }
 
 int main(int, char**)

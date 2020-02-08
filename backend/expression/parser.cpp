@@ -13,9 +13,9 @@ public:
 		: m_value{i}
 	{}
 
-	life::Board evaluate() override {
+	life::Inputs evaluate() override {
 		life::Input input{life::rle::Glider, life::Coords{ {0, 0} }};
-		return  m_value == 1 ? life::Create({input}, life::FromRLE) : life::Board{0, 0};
+		return  m_value == 1 ? life::Inputs{ {input} } : life::Inputs{};
 	}
 
 private:

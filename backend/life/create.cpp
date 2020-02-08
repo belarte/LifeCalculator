@@ -7,6 +7,10 @@ namespace life {
 
 Board Create(Inputs inputs, Generator gen)
 {
+	if (inputs.empty()) {
+		return Board{0, 0};
+	}
+
 	size_t width = 0, height = 0;
 	auto xOrigin = std::numeric_limits<size_t>::max();
 	auto yOrigin = std::numeric_limits<size_t>::max();

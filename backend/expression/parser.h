@@ -1,14 +1,9 @@
-#include "life/board.h"
+#include "expression.h"
+
 #include <memory>
 #include <string>
 
 namespace expression {
-
-class Expression
-{
-public:
-	virtual life::Inputs evaluate() = 0;
-};
 
 class Parser
 {

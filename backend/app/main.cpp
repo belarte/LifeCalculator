@@ -1,4 +1,5 @@
 #include "expression/parser.h"
+#include "life/board.h"
 #include "life/create.h"
 #include "life/rle.h"
 #include "websocket/websocket.h"

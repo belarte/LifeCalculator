@@ -17,6 +17,7 @@ public:
 
 private:
 	uint8_t m_value;
+	uint8_t m_spacing;
 };
 
 } // end namespace

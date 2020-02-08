@@ -5,6 +5,16 @@
 
 namespace expression {
 
+class InvalidNumber : public std::exception
+{
+public:
+	InvalidNumber(int n);
+	const char* what() const throw() override;
+
+private:
+	int m_value;
+};
+
 class Parser
 {
 public:

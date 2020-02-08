@@ -7,6 +7,7 @@ target_link_libraries(expression life)
 
 add_executable(test_expression
 	tests/expression.cpp
+	tests/parser.cpp
 )
 
 target_link_libraries(test_expression expression)

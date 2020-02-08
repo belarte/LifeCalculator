@@ -11,12 +11,12 @@ public:
 class ConstExpression : public Expression
 {
 public:
-	ConstExpression(int i);
+	ConstExpression(uint8_t i);
 
 	life::Inputs evaluate() override;
 
 private:
-	int m_value;
+	uint8_t m_value;
 };
 
 } // end namespace

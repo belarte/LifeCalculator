@@ -3,7 +3,7 @@
 
 namespace expression {
 
-ConstExpression::ConstExpression(int i)
+ConstExpression::ConstExpression(uint8_t i)
 		: m_value{i}
 	{}
 

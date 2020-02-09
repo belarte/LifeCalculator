@@ -5,7 +5,7 @@ namespace expression {
 
 ConstExpression::ConstExpression(uint8_t i) :
 	m_value{i},
-	m_offset{5}
+	m_offset{11}
 {}
 
 life::Inputs ConstExpression::evaluate() {

@@ -35,10 +35,10 @@ TEST(ConstExpressionEvatuatesTo, correct_input_for_large_number)
 	EXPECT_EQ(inputs[0].pattern, life::rle::Glider);
 	EXPECT_THAT(inputs[0].offsets, SizeIs(4));
 	EXPECT_THAT(inputs[0].offsets, UnorderedElementsAre(
-		life::Coord{5, 0},
-		life::Coord{20, 0},
-		life::Coord{30, 0},
-		life::Coord{35, 0}
+		life::Coord{11, 0},
+		life::Coord{44, 0},
+		life::Coord{66, 0},
+		life::Coord{77, 0}
 	));
 }
 

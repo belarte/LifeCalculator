@@ -61,3 +61,39 @@ TEST(OutputExpressionEvaluatesTo, eight_eaters_with_input_0)
 		life::Coord{77, 0}
 	));
 }
+
+TEST(OutputExpressionEvaluatesTo, correct_output_with_non_zero_input)
+{
+	auto expr = OutputExpression(std::make_unique<ConstExpression>(135));
+	auto inputs = expr.evaluate();
+
+	EXPECT_THAT(inputs, SizeIs(2));
+
+	for (const auto& input : inputs) {
+		if (input.pattern == life::rle::Eater) {
+			EXPECT_THAT(input.offsets, SizeIs(8));
+			EXPECT_THAT(input.offsets, UnorderedElementsAre(
+				life::Coord{1, 4},
+				life::Coord{12, 4},
+				life::Coord{23, 4},
+				life::Coord{34, 4},
+				life::Coord{45, 4},
+				life::Coord{56, 4},
+				life::Coord{67, 4},
+				life::Coord{78, 4}
+			));
+		} else if (input.pattern == life::rle::Glider) {
+			EXPECT_THAT(input.offsets, SizeIs(4));
+			EXPECT_THAT(input.offsets, UnorderedElementsAre(
+				life::Coord{0, 0},
+				life::Coord{11, 0},
+				life::Coord{22, 0},
+				life::Coord{77, 0}
+			));
+		} else {
+			FAIL() << "Unexpected input pattern";
+		}
+	}
+}
+
+// TODO test for non-zero input

@@ -30,12 +30,24 @@ OutputExpression::OutputExpression(std::unique_ptr<Expression> expr) :
 
 life::Inputs OutputExpression::evaluate()
 {
-	life::Coords offsets;
-	for (uint8_t i = 0; i<8; ++i) {
-		offsets.push_back(life::Coord{uint8_t(m_offset * i), 0});
+	life::Inputs output;
+
+	auto offset = life::Coord{0, 0};
+	auto inputs = m_input->evaluate();
+	if (!inputs.empty()) {
+		offset = life::Coord{1, 4};
+		for (const auto& input : inputs) {
+			output.push_back(input);
+		}
 	}
 
-	return  life::Inputs{ { life::Input{ life::rle::Eater, offsets } } };
+	life::Coords offsets;
+	for (uint8_t i = 0; i<8; ++i) {
+		offsets.push_back(life::Coord{uint8_t(m_offset * i), 0} + offset);
+	}
+
+	output.push_back(life::Input{ life::rle::Eater, offsets});
+	return output;
 }
 
 } // end namespace

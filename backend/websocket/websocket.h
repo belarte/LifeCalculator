@@ -1,3 +1,5 @@
+#pragma once
+
 #include <boost/beast/websocket.hpp>
 
 namespace ws {

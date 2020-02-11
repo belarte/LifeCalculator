@@ -1,7 +1,7 @@
+#pragma once
+
 #include "life/types.h"
 #include <algorithm>
-
-#pragma once
 
 namespace expression {
 

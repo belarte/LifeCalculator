@@ -1,3 +1,5 @@
+#pragma once
+
 #include "life/types.h"
 
 #include <memory>

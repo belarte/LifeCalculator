@@ -1,4 +1,5 @@
 add_library(expression
+	bit.cpp
 	expression.cpp
 	parser.cpp
 )
@@ -6,6 +7,7 @@ add_library(expression
 target_link_libraries(expression life)
 
 add_executable(test_expression
+	tests/bit.cpp
 	tests/expression.cpp
 	tests/parser.cpp
 )

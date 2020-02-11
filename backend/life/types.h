@@ -21,9 +21,13 @@ std::ostream& operator<<(std::ostream&, const Coord&);
 using Coords = std::vector<Coord>;
 
 struct Input {
-	const std::string pattern;
-	const Coords offsets;
+	std::string pattern;
+	Coords offsets;
 };
+
+bool operator==(const Input& left, const Input& right);
+
+std::ostream& operator<<(std::ostream&, const Input&);
 
 using Inputs = std::vector<Input>;
 

@@ -8,9 +8,9 @@ Bit::Bit(const life::Inputs& data, uint32_t width) :
 {}
 
 Bit::Bit(const Bit& left, const Bit& right) :
+	m_data{ left.m_data },
 	m_width{ std::max(left.width(), right.width()) }
 {
-	m_data = left.m_data;
 	for (const auto& input : right.m_data) {
 		auto it = std::find_if(m_data.begin(), m_data.end(), [input](const life::Input& i) {
 			return input.pattern == i.pattern;

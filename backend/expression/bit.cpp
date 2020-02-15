@@ -2,11 +2,13 @@
 
 namespace expression {
 
-Bit::Bit(const life::Inputs& data) :
-	m_data{data}
+Bit::Bit(const life::Inputs& data, uint32_t width) :
+	m_data{data},
+	m_width{width}
 {}
 
-Bit::Bit(const Bit& left, const Bit& right)
+Bit::Bit(const Bit& left, const Bit& right) :
+	m_width{ std::max(left.width(), right.width()) }
 {
 	m_data = left.m_data;
 	for (const auto& input : right.m_data) {
@@ -38,6 +40,11 @@ void Bit::offset(life::Coord c)
 			coord = coord + c;
 		}
 	}
+}
+
+uint32_t Bit::width() const
+{
+	return m_width;
 }
 
 

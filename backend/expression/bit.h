@@ -14,6 +14,7 @@ public:
 	bool operator==(const Bit& other) const;
 
 	life::Inputs output() const;
+	void offset(life::Coord);
 
 private:
 	life::Inputs m_data;

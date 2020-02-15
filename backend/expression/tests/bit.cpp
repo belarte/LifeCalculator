@@ -31,3 +31,18 @@ TEST(BitConstructs, a_bit_from_two_bits)
 		{ life::rle::Eater, life::Coords{ {5, 5} } }
 	} }));
 }
+
+TEST(BitManipulation, offset_propagates_to_output)
+{
+	Bit input{ life::Inputs{
+		{ life::rle::Glider, life::Coords{ {0, 0}, {1, 0} } },
+		{ life::rle::Eater, life::Coords{ {5, 5}, {10, 10} } }
+	} };
+
+	input.offset({1, 2});
+
+	EXPECT_THAT(input.output(), Eq(life::Inputs{
+		{ life::rle::Glider, life::Coords{ {1, 2}, {2, 2} } },
+		{ life::rle::Eater, life::Coords{ {6, 7}, {11, 12} } }
+	}));
+}

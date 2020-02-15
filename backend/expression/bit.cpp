@@ -30,4 +30,15 @@ life::Inputs Bit::output() const
 {
 	return m_data;
 }
+
+void Bit::offset(life::Coord c)
+{
+	for (auto& input : m_data) {
+		for (auto& coord : input.offsets) {
+			coord = coord + c;
+		}
+	}
+}
+
+
 } // end namespace

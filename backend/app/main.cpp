@@ -4,6 +4,8 @@
 #include "life/rle.h"
 #include "websocket/websocket.h"
 
+#include <iostream>
+
 life::Board Create(const std::string& input)
 {
 	auto expr = expression::Parser{}.parse(input);
